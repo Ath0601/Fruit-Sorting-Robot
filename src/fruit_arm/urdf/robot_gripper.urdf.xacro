@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="QARM_with_Gripper" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Include the separate files -->
+  <xacro:include filename="$(find fruit_arm)/urdf/qarm_robot.urdf.xacro" />
+  <xacro:include filename="$(find fruit_arm)/urdf/qarm_gripper.urdf.xacro" />
+  <xacro:include filename="$(find fruit_arm)/urdf/environment.urdf.xacro" />
+
+  <!-- World link -->
+  <link name="world"/>
+
+  <xacro:environment prefix="" />
+
+  <!-- Base joint -->
+  <!--<joint name="world_base_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <parent link="world"/>
+    <child link="base_link"/>
+  </joint>-->
+
+  <joint name="robot_table_to_base_link" type="fixed">
+    <parent link="table_link"/>
+    <child link="base_link"/>
+    <origin xyz="-0.65 0 0.01" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Add the robot arm -->
+  <xacro:qarm_robot prefix="" />
+
+  <!-- Add the gripper, attaching it to the END-EFFECTOR link -->
+  <xacro:gripper prefix="" parent_link="END-EFFECTOR" />
+
+  <!-- Material Definitions -->
+  <material name="robot_grey">
+    <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1"/>
+  </material>
+
+  <gazebo>
+    <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+      <parameters>/home/atharva/quanser_ws/src/fruit_arm/config/controller_robot.yaml</parameters>
+      <controller_manager_name>controller_manager</controller_manager_name>
+    </plugin>
+  </gazebo>
+
+</robot>

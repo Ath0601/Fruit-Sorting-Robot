@@ -1,0 +1,18 @@
+# Default initial positions for QARM_with_Gripper's ros2_control fake system
+
+initial_positions:
+  ELBOW_joint: 0.0
+  SHOULDER_joint: 0.0
+  WRIST_joint: 0.0
+  YAW_joint: 0.0
+  gripper_finger_1_joint_1: 0.0
+  gripper_finger_1_joint_2: 0.0
+  gripper_finger_1_joint_3: 0.0
+  gripper_finger_2_joint_1: 0.0
+  gripper_finger_2_joint_2: 0.0
+  gripper_finger_2_joint_3: 0.0
+  gripper_finger_middle_joint_1: 0.0
+  gripper_finger_middle_joint_2: 0.0
+  gripper_finger_middle_joint_3: 0.0
+  gripper_palm_finger_1_joint: 0.0
+  gripper_palm_finger_2_joint: 0.0

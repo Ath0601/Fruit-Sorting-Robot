@@ -1,0 +1,25 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: fruit_arm
+    relative_path: urdf/robot_gripper.urdf.xacro
+  srdf:
+    relative_path: config/QARM_with_Gripper.srdf
+  package_settings:
+    author_name: atharva
+    author_email: atharva@todo.todo
+    generated_timestamp: 1762415112
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity

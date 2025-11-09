@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="Environment" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="environment" params="prefix:=''">
+
+    <!--Table, Fruits and Crates Definitions-->
+    <link name="${prefix}table_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://fruit_arm/meshes/environment/simplify_table_new.stl" scale="0.0015 0.0015 0.0015"/>
+        </geometry>
+        <material name="wood_table">
+          <color rgba="0.7 0.5 0.3 1.0"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="1.3 0.8 0.05"/>
+        </geometry>
+        <origin xyz="0 0 0.025" rpy="0 0 0"/>
+      </collision>
+      <inertial>
+        <mass value="30"/>
+        <origin xyz="0 0 0.025" rpy="0 0 0"/>
+        <inertia ixx="0.7" ixy="0" ixz="0" iyy="2" iyz="0" izz="2"/>
+      </inertial>
+    </link>
+    <gazebo reference="${prefix}table_link">
+      <self_collide>true</self_collide>
+      <static>true</static>
+    </gazebo>
+    <joint name="${prefix}world_to_robot_table" type="fixed">
+      <parent link="world"/>
+      <child link="${prefix}table_link"/>
+      <origin xyz="0 0 1.340643" rpy="0 0 0"/>
+    </joint>
+
+    <!-- Banana Crate -->
+    <link name="${prefix}banana_crate">
+      <visual>
+        <geometry>
+          <mesh filename="package://fruit_arm/meshes/environment/Banana_Crate.stl" scale="0.00040 0.00040 0.00040"/>
+        </geometry>
+        <material name="wood_table">
+          <color rgba="0.6 0.4 0.2 1.0"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://fruit_arm/meshes/environment/Banana_Crate.stl" scale="0.00040 0.00040 0.00040"/>    
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}table_to_banana_crate" type="fixed">
+      <parent link="${prefix}table_link"/>
+      <child link="${prefix}banana_crate"/>
+      <origin xyz="-0.05 0.4 0.01" rpy="0 0 -1.57909"/>
+    </joint>
+
+    <!-- Apple Crate -->
+    <link name="${prefix}apple_crate">
+      <visual>
+        <geometry>
+          <mesh filename="package://fruit_arm/meshes/environment/Apple_Crate.stl" scale="0.00040 0.00040 0.00040"/>
+        </geometry>
+        <material name="wood_table">
+          <color rgba="0.6 0.4 0.2 1.0"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://fruit_arm/meshes/environment/Apple_Crate.stl" scale="0.00040 0.00040 0.00040"/>    
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}table_to_apple_crate" type="fixed">
+      <parent link="${prefix}table_link"/>
+      <child link="${prefix}apple_crate"/>
+      <origin xyz="-0.05 0.1 0.01" rpy="0 0 -1.57909"/>
+    </joint>
+
+    <!-- Orange Crate -->
+    <link name="${prefix}orange_crate">
+      <visual>
+        <geometry>
+          <mesh filename="package://fruit_arm/meshes/environment/Orange_Crate.stl" scale="0.00040 0.00040 0.00040"/>
+        </geometry>
+        <material name="wood_table">
+          <color rgba="0.6 0.4 0.2 1.0"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://fruit_arm/meshes/environment/Orange_Crate.stl" scale="0.00040 0.00040 0.00040"/>    
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}table_to_orange_crate" type="fixed">
+      <parent link="${prefix}table_link"/>
+      <child link="${prefix}orange_crate"/>
+      <origin xyz="-0.05 -0.2 0.01" rpy="0 0 -1.57909"/>
+    </joint>
+
+    <!-- Fruits -->
+    <link name="${prefix}banana">
+      <visual>
+        <geometry>
+          <mesh filename="package://fruit_arm/meshes/environment/Banana.stl" scale="0.0005 0.0005 0.0005"/>
+        </geometry>
+        <material name="banana_yellow">
+          <color rgba="1.0 0.85 0.0 1.0"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://fruit_arm/meshes/environment/Banana.stl" scale="0.0005 0.0005 0.0005"/>    
+        </geometry>
+      </collision>
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="0.12"/>
+        <inertia ixx="0.00003" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.00003"/>
+      </inertial>
+    </link>
+    <joint name="${prefix}banana_to_table" type="fixed">
+      <parent link="${prefix}table_link"/>
+      <child link="${prefix}banana"/>
+      <origin xyz="-0.3 0.00 0.013" rpy="0.70 0.0 0.7"/>
+    </joint>
+
+    <link name="${prefix}apple">
+      <visual>
+        <geometry>
+          <mesh filename="package://fruit_arm/meshes/environment/Apple.stl" scale="0.0005 0.0005 0.0005"/>
+        </geometry>
+        <material name="apple_red">
+          <color rgba="0.8 0.1 0.1 1.0"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://fruit_arm/meshes/environment/Apple.stl" scale="0.0005 0.0005 0.0005"/>    
+        </geometry>
+      </collision>
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="0.15"/>
+        <inertia ixx="0.00002" ixy="0.0" ixz="0.0" iyy="0.00002" iyz="0.0" izz="0.00002"/>
+      </inertial>
+    </link>
+    <joint name="${prefix}apple_to_table" type="fixed">
+      <parent link="${prefix}table_link"/>
+      <child link="${prefix}apple"/>
+      <origin xyz="-0.3 -0.35 0.028" rpy="3.14159 3.14159 1.57909"/>
+    </joint>
+
+    <link name="${prefix}orange">
+      <visual>
+        <geometry>
+          <mesh filename="package://fruit_arm/meshes/environment/Orange.stl" scale="0.65 0.65 0.65"/>
+        </geometry>
+        <material name="orange_colour">
+          <color rgba="1.0 0.5 0.0 1.0"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://fruit_arm/meshes/environment/Orange.stl" scale="0.65 0.65 0.65"/>    
+        </geometry>
+      </collision>
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="0.18"/>
+        <inertia ixx="0.000025" ixy="0.0" ixz="0.0" iyy="0.000025" iyz="0.0" izz="0.000025"/>
+      </inertial>
+    </link>
+    <joint name="${prefix}orange_to_table" type="fixed">
+      <parent link="${prefix}table_link"/>
+      <child link="${prefix}orange"/>
+      <origin xyz="-0.3 0.35 0.028" rpy="1.57909 0.0 0.5"/>
+    </joint>
+
+  </xacro:macro>
+
+  <!-- Material Definitions -->
+  <material name="wood_table">
+    <color rgba="0.7 0.5 0.3 1.0"/>
+  </material>
+  <material name="banana_yellow">
+    <color rgba="1.0 0.85 0.0 1.0"/>
+  </material>
+  <material name="apple_red">
+    <color rgba="0.8 0.1 0.1 1.0"/>
+  </material>
+  <material name="orange_colour">
+    <color rgba="1.0 0.5 0.0 1.0"/>
+  </material>
+
+</robot>

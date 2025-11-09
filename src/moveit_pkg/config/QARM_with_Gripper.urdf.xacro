@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="QARM_with_Gripper">
+    <xacro:arg name="initial_positions_file" default="initial_positions.yaml" />
+
+    <!-- Import QARM_with_Gripper urdf file -->
+    <xacro:include filename="$(find fruit_arm)/urdf/robot_gripper.urdf.xacro" />
+
+    <!-- Import control_xacro -->
+    <xacro:include filename="QARM_with_Gripper.ros2_control.xacro" />
+
+
+    <xacro:QARM_with_Gripper_ros2_control name="FakeSystem" initial_positions_file="$(arg initial_positions_file)"/>
+
+</robot>

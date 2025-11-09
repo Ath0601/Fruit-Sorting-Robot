@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="QARM" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="qarm_robot" params="prefix:=''">
+
+    <!--Robot Arm Links and Joints Definitions-->
+    <link name="${prefix}base_link">
+      <inertial>
+        <origin xyz="0.000529200576288575 -2.23307396420992E-06 0.0267852902177001" rpy="0 0 0" />
+        <mass value="3.89847036294307" />
+        <inertia
+          ixx="0.0259717926187233"
+          ixy="7.41706820354147E-07"
+          ixz="-9.20327430275286E-08"
+          iyy="0.0237418182185852"
+          iyz="6.90408382921997E-11"
+          izz="0.048730018421969" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://fruit_arm/meshes/robot/base_link.stl"/>
+        </geometry>
+        <material name="robot_grey">
+          <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1"/>
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://fruit_arm/meshes/robot/base_link.stl"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="${prefix}YAW">
+      <inertial>
+        <origin xyz="9.37418676855843E-09 -3.48810780368004E-09 0.115813977186301" rpy="0 0 0" />
+        <mass value="0.701518504018672" />
+        <inertia
+          ixx="0.000478980181395404"
+          ixy="3.49149750193703E-12"
+          ixz="5.35348095946474E-11"
+          iyy="0.000450830880977554"
+          iyz="9.21997569253762E-11"
+          izz="0.000625067532631923" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://fruit_arm/meshes/robot/YAW.stl" />
+        </geometry>
+        <material name="robot_grey"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://fruit_arm/meshes/robot/YAW.stl" />
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="${prefix}YAW_joint" type="revolute">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <parent link="${prefix}base_link" />
+      <child link="${prefix}YAW" />
+      <axis xyz="0 0 1" />
+      <limit lower="-2.967" upper="2.967" effort="0" velocity="0" />
+    </joint>
+
+    <link name="${prefix}BICEP">
+      <inertial>
+        <origin xyz="0.0136584263393359 -0.234778864037209 -7.06001931450219E-05" rpy="0 0 0" />
+        <mass value="0.706073338310231" />
+        <inertia
+          ixx="0.00242444522090698"
+          ixy="2.42682372909241E-06"
+          ixz="-6.26703067273348E-07"
+          iyy="0.000274342515078279"
+          iyz="1.69726051287685E-06"
+          izz="0.00246773570290634" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://fruit_arm/meshes/robot/BICEP.stl" />
+        </geometry>
+        <material name="robot_grey"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://fruit_arm/meshes/robot/BICEP.stl" />
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="${prefix}SHOULDER_joint" type="revolute">
+      <origin xyz="0 0 0.1397714" rpy="-1.5707963267949 0 0" />
+      <parent link="${prefix}YAW" />
+      <child link="${prefix}BICEP" />
+      <axis xyz="0 0 1" />
+      <limit lower="-1.483" upper="1.483" effort="0" velocity="0" />
+    </joint>
+
+    <link name="${prefix}FOREARM">
+      <inertial>
+        <origin xyz="0.0372712542033594 0.155357218514742 0.000271723941997439" rpy="0 0 0" />
+        <mass value="0.4296669212638" />
+        <inertia
+          ixx="0.000344487673462402"
+          ixy="-2.89506781372207E-05"
+          ixz="4.98141800994188E-07"
+          iyy="0.000149695456153606"
+          iyz="2.97325983931059E-06"
+          izz="0.000297718151262944" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://fruit_arm/meshes/robot/FOREARM.stl" />
+        </geometry>
+        <material name="robot_grey"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://fruit_arm/meshes/robot/FOREARM.stl" />
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="${prefix}ELBOW_joint" type="revolute">
+      <origin xyz="0.0500000000000004 -0.350000000000015 0" 
+        rpy="0 0 -1.42889927219074" />
+      <parent link="${prefix}BICEP" />
+      <child link="${prefix}FOREARM" />
+      <axis xyz="0 0 1" />
+      <limit lower="-1.658" upper="1.309" effort="0" velocity="0" />
+    </joint>
+
+    <link name="${prefix}END-EFFECTOR">
+      <inertial>
+        <origin xyz="-7.14013714436801E-05 -4.06287319420589E-05 0.0057237846257307" rpy="0 0 0" />
+        <mass value="0.025331269641348" />
+        <inertia
+          ixx="2.26806595610621E-06"
+          ixy="7.98741449900658E-09"
+          ixz="1.08626792635935E-08"
+          iyy="2.22929725748166E-06"
+          iyz="-5.49899749477752E-09"
+          izz="4.00602755679902E-06" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://fruit_arm/meshes/robot/END-EFFECTOR.stl" />
+        </geometry>
+        <material name="robot_grey"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://fruit_arm/meshes/robot/END-EFFECTOR.stl" />
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="${prefix}WRIST_joint" type="revolute">
+      <origin xyz="0.0336611536380097 0.235607569369425 0" rpy="-1.5707963267949 0 -0.141897054604159" />
+      <parent link="${prefix}FOREARM" />
+      <child link="${prefix}END-EFFECTOR" />
+      <axis xyz="0 0 1" />
+      <limit lower="-3.010" upper="3.010" effort="0" velocity="0" />
+    </joint>
+
+    <!--Camera Sensor and Definition-->
+    <link name="${prefix}forearm_camera_link"/>
+    <joint name="${prefix}forearm_camera_joint" type="fixed">
+      <parent link="${prefix}FOREARM"/>
+      <child link="${prefix}forearm_camera_link"/>
+      <origin xyz="0.082 0.2075 0.0" rpy="0.0 0.0 -0.1"/>
+    </joint>
+
+    <gazebo reference="${prefix}forearm_camera_link">
+      <sensor name="rgb_camera" type="camera">
+        <pose>0 0 0 1.57909 0 1.57079</pose>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <visualize>true</visualize>
+        <camera>
+          <horizontal_fov>2.0944</horizontal_fov>
+          <image>
+            <width>1280</width>
+            <height>720</height>
+            <format>R8G8B8</format>
+          </image>
+          <lens>
+            <intrinsics>
+              <fx>369.4</fx>
+              <fy>369.4</fy>
+              <cx>640.0</cx>
+              <cy>360.0</cy>
+            </intrinsics>
+          </lens>
+          <clip>
+            <near>0.1</near>
+            <far>10.0</far>
+          </clip>
+          <topic>rgb_camera</topic>
+          <ignition_frame_id>forearm_camera_optical_frame</ignition_frame_id>
+        </camera>
+      </sensor>
+      <sensor name="rgbd_camera" type="rgbd_camera">
+        <pose>0 0 0 1.57909 0 1.57079</pose>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <visualize>true</visualize>
+        <camera>
+          <horizontal_fov>2.0944</horizontal_fov>
+          <image>
+            <width>1280</width>
+            <height>720</height>
+            <format>R8G8B8</format>
+          </image>
+          <lens>
+            <intrinsics>
+              <fx>369.4</fx>
+              <fy>369.4</fy>
+              <cx>640.0</cx>
+              <cy>360.0</cy>
+            </intrinsics>
+          </lens>
+          <clip>
+            <near>0.1</near>
+            <far>10.0</far>
+          </clip>
+        </camera>
+        <depth_camera>
+          <output>depth</output>
+          <topic>depth_camera</topic>
+        </depth_camera>
+        <ignition_frame_id>forearm_camera_optical_frame</ignition_frame_id>
+      </sensor>
+    </gazebo>
+
+    <!--Robot Control Block-->
+    <ros2_control name="${prefix}QArm_System" type="system">
+      <hardware>
+        <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+      </hardware>
+      <joint name="${prefix}YAW_joint">
+        <command_interface name="position"/>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+      <joint name="${prefix}SHOULDER_joint">
+        <command_interface name="position"/>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+      <joint name="${prefix}ELBOW_joint">
+        <command_interface name="position"/>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+      <joint name="${prefix}WRIST_joint">
+        <command_interface name="position"/>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+    </ros2_control>
+
+    <!--Robot Arm Transmission Block-->
+    <transmission name="${prefix}YAW_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}YAW_joint">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}YAW_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+    <transmission name="${prefix}SHOULDER_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}SHOULDER_joint">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}SHOULDER_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+    <transmission name="${prefix}ELBOW_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}ELBOW_joint">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}ELBOW_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+    <transmission name="${prefix}WRIST_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}WRIST_joint">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}WRIST_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+  </xacro:macro>
+
+</robot>

@@ -1,0 +1,518 @@
+atharva@atharva-Legion-Pro-5-16IRX9:~/quanser_ws$ python3 /home/atharva/quanser_ws/src/fruit_arm/src/training_script.py
+🎉 Using GPU: NVIDIA GeForce RTX 4060 Laptop GPU
+GPU Memory: 7.6 GB
+Using device: cuda
+Found 1831 images in train split
+Found 685 images in valid split
+Training samples: 1831
+Validation samples: 685
+Batch size: 8
+Model created with pretrained weights
+Starting training...
+Using device: cuda
+Epoch 1/50, Batch 0/229, Loss: 69.5000
+Epoch 1/50, Batch 50/229, Loss: 34.8164
+Epoch 1/50, Batch 100/229, Loss: 28.7823
+Epoch 1/50, Batch 150/229, Loss: 27.7544
+Epoch 1/50, Batch 200/229, Loss: 24.3348
+Epoch 1/50:
+  Train Loss: 28.4551
+  Val Loss: 181.0813
+  Learning Rate: 0.000100
+--------------------------------------------------
+Epoch 2/50, Batch 0/229, Loss: 24.4899
+Epoch 2/50, Batch 50/229, Loss: 24.8267
+Epoch 2/50, Batch 100/229, Loss: 21.5277
+Epoch 2/50, Batch 150/229, Loss: 20.7937
+Epoch 2/50, Batch 200/229, Loss: 16.4780
+Epoch 2/50:
+  Train Loss: 20.8558
+  Val Loss: 176.2938
+  Learning Rate: 0.000100
+--------------------------------------------------
+Epoch 3/50, Batch 0/229, Loss: 18.7854
+Epoch 3/50, Batch 50/229, Loss: 16.8101
+Epoch 3/50, Batch 100/229, Loss: 15.2890
+Epoch 3/50, Batch 150/229, Loss: 16.3968
+Epoch 3/50, Batch 200/229, Loss: 13.9027
+Epoch 3/50:
+  Train Loss: 16.4743
+  Val Loss: 217.4505
+  Learning Rate: 0.000100
+--------------------------------------------------
+Epoch 4/50, Batch 0/229, Loss: 13.1779
+Epoch 4/50, Batch 50/229, Loss: 14.2228
+Epoch 4/50, Batch 100/229, Loss: 13.5268
+Epoch 4/50, Batch 150/229, Loss: 11.8963
+Epoch 4/50, Batch 200/229, Loss: 10.5243
+Epoch 4/50:
+  Train Loss: 12.2900
+  Val Loss: 2.8861
+  Learning Rate: 0.000100
+--------------------------------------------------
+Epoch 5/50, Batch 0/229, Loss: 8.2901
+Epoch 5/50, Batch 50/229, Loss: 9.3003
+Epoch 5/50, Batch 100/229, Loss: 9.8978
+Epoch 5/50, Batch 150/229, Loss: 9.5045
+Epoch 5/50, Batch 200/229, Loss: 4.5755
+Epoch 5/50:
+  Train Loss: 7.9681
+  Val Loss: 2.7606
+  Learning Rate: 0.000100
+--------------------------------------------------
+Epoch 6/50, Batch 0/229, Loss: 7.2128
+Epoch 6/50, Batch 50/229, Loss: 2.9277
+Epoch 6/50, Batch 100/229, Loss: 4.0330
+Epoch 6/50, Batch 150/229, Loss: 4.9889
+Epoch 6/50, Batch 200/229, Loss: 5.2338
+Epoch 6/50:
+  Train Loss: 5.0726
+  Val Loss: 2.7995
+  Learning Rate: 0.000100
+--------------------------------------------------
+Epoch 7/50, Batch 0/229, Loss: 3.6209
+Epoch 7/50, Batch 50/229, Loss: 4.5158
+Epoch 7/50, Batch 100/229, Loss: 3.8624
+Epoch 7/50, Batch 150/229, Loss: 4.5506
+Epoch 7/50, Batch 200/229, Loss: 3.3473
+Epoch 7/50:
+  Train Loss: 4.1865
+  Val Loss: 2.7995
+  Learning Rate: 0.000100
+--------------------------------------------------
+Epoch 8/50, Batch 0/229, Loss: 4.1672
+Epoch 8/50, Batch 50/229, Loss: 4.5099
+Epoch 8/50, Batch 100/229, Loss: 4.4629
+Epoch 8/50, Batch 150/229, Loss: 3.7946
+Epoch 8/50, Batch 200/229, Loss: 3.6569
+Epoch 8/50:
+  Train Loss: 4.0298
+  Val Loss: 2.8224
+  Learning Rate: 0.000100
+--------------------------------------------------
+Epoch 9/50, Batch 0/229, Loss: 5.2670
+Epoch 9/50, Batch 50/229, Loss: 4.4978
+Epoch 9/50, Batch 100/229, Loss: 3.4936
+Epoch 9/50, Batch 150/229, Loss: 4.6463
+Epoch 9/50, Batch 200/229, Loss: 4.3708
+Epoch 9/50:
+  Train Loss: 3.9990
+  Val Loss: 2.8932
+  Learning Rate: 0.000100
+--------------------------------------------------
+Epoch 10/50, Batch 0/229, Loss: 4.3999
+Epoch 10/50, Batch 50/229, Loss: 4.1461
+Epoch 10/50, Batch 100/229, Loss: 3.7586
+Epoch 10/50, Batch 150/229, Loss: 3.9213
+Epoch 10/50, Batch 200/229, Loss: 4.2901
+Epoch 10/50:
+  Train Loss: 3.9781
+  Val Loss: 2.7422
+  Learning Rate: 0.000100
+--------------------------------------------------
+Checkpoint saved: ssd_fruit_checkpoint_epoch_10.pth
+Epoch 11/50, Batch 0/229, Loss: 2.6797
+Epoch 11/50, Batch 50/229, Loss: 3.9848
+Epoch 11/50, Batch 100/229, Loss: 4.3491
+Epoch 11/50, Batch 150/229, Loss: 3.0435
+Epoch 11/50, Batch 200/229, Loss: 3.8823
+Epoch 11/50:
+  Train Loss: 3.9474
+  Val Loss: 2.7907
+  Learning Rate: 0.000100
+--------------------------------------------------
+Epoch 12/50, Batch 0/229, Loss: 2.5952
+Epoch 12/50, Batch 50/229, Loss: 4.9081
+Epoch 12/50, Batch 100/229, Loss: 3.5999
+Epoch 12/50, Batch 150/229, Loss: 4.1310
+Epoch 12/50, Batch 200/229, Loss: 3.6989
+Epoch 12/50:
+  Train Loss: 3.9080
+  Val Loss: 2.7469
+  Learning Rate: 0.000100
+--------------------------------------------------
+Epoch 13/50, Batch 0/229, Loss: 5.5993
+Epoch 13/50, Batch 50/229, Loss: 4.6412
+Epoch 13/50, Batch 100/229, Loss: 4.2560
+Epoch 13/50, Batch 150/229, Loss: 2.8697
+Epoch 13/50, Batch 200/229, Loss: 3.4248
+Epoch 13/50:
+  Train Loss: 3.8813
+  Val Loss: 2.8752
+  Learning Rate: 0.000100
+--------------------------------------------------
+Epoch 14/50, Batch 0/229, Loss: 5.3245
+Epoch 14/50, Batch 50/229, Loss: 3.3954
+Epoch 14/50, Batch 100/229, Loss: 5.8273
+Epoch 14/50, Batch 150/229, Loss: 5.3072
+Epoch 14/50, Batch 200/229, Loss: 4.3025
+Epoch 14/50:
+  Train Loss: 3.8744
+  Val Loss: 2.7146
+  Learning Rate: 0.000100
+--------------------------------------------------
+Epoch 15/50, Batch 0/229, Loss: 4.0135
+Epoch 15/50, Batch 50/229, Loss: 3.8458
+Epoch 15/50, Batch 100/229, Loss: 4.0721
+Epoch 15/50, Batch 150/229, Loss: 2.7410
+Epoch 15/50, Batch 200/229, Loss: 3.8207
+Epoch 15/50:
+  Train Loss: 3.8228
+  Val Loss: 2.7915
+  Learning Rate: 0.000100
+--------------------------------------------------
+Epoch 16/50, Batch 0/229, Loss: 3.9707
+Epoch 16/50, Batch 50/229, Loss: 2.9255
+Epoch 16/50, Batch 100/229, Loss: 5.4678
+Epoch 16/50, Batch 150/229, Loss: 2.9159
+Epoch 16/50, Batch 200/229, Loss: 4.0671
+Epoch 16/50:
+  Train Loss: 3.8002
+  Val Loss: 2.7859
+  Learning Rate: 0.000100
+--------------------------------------------------
+Epoch 17/50, Batch 0/229, Loss: 3.4381
+Epoch 17/50, Batch 50/229, Loss: 3.0647
+Epoch 17/50, Batch 100/229, Loss: 4.2054
+Epoch 17/50, Batch 150/229, Loss: 2.8684
+Epoch 17/50, Batch 200/229, Loss: 4.2940
+Epoch 17/50:
+  Train Loss: 3.7844
+  Val Loss: 2.8498
+  Learning Rate: 0.000100
+--------------------------------------------------
+Epoch 18/50, Batch 0/229, Loss: 5.8913
+Epoch 18/50, Batch 50/229, Loss: 3.1899
+Epoch 18/50, Batch 100/229, Loss: 3.1574
+Epoch 18/50, Batch 150/229, Loss: 2.5853
+Epoch 18/50, Batch 200/229, Loss: 4.3241
+Epoch 18/50:
+  Train Loss: 3.7579
+  Val Loss: 2.8576
+  Learning Rate: 0.000100
+--------------------------------------------------
+Epoch 19/50, Batch 0/229, Loss: 2.7231
+Epoch 19/50, Batch 50/229, Loss: 2.4723
+Epoch 19/50, Batch 100/229, Loss: 3.2862
+Epoch 19/50, Batch 150/229, Loss: 3.6309
+Epoch 19/50, Batch 200/229, Loss: 4.2695
+Epoch 19/50:
+  Train Loss: 3.7270
+  Val Loss: 2.8109
+  Learning Rate: 0.000100
+--------------------------------------------------
+Epoch 20/50, Batch 0/229, Loss: 4.5746
+Epoch 20/50, Batch 50/229, Loss: 4.0450
+Epoch 20/50, Batch 100/229, Loss: 2.4810
+Epoch 20/50, Batch 150/229, Loss: 3.7472
+Epoch 20/50, Batch 200/229, Loss: 3.9542
+Epoch 20/50:
+  Train Loss: 3.6878
+  Val Loss: 2.8217
+  Learning Rate: 0.000010
+--------------------------------------------------
+Checkpoint saved: ssd_fruit_checkpoint_epoch_20.pth
+Epoch 21/50, Batch 0/229, Loss: 3.0350
+Epoch 21/50, Batch 50/229, Loss: 4.0215
+Epoch 21/50, Batch 100/229, Loss: 4.1081
+Epoch 21/50, Batch 150/229, Loss: 4.5599
+Epoch 21/50, Batch 200/229, Loss: 3.3018
+Epoch 21/50:
+  Train Loss: 3.6024
+  Val Loss: 2.8114
+  Learning Rate: 0.000010
+--------------------------------------------------
+Epoch 22/50, Batch 0/229, Loss: 2.7373
+Epoch 22/50, Batch 50/229, Loss: 4.0563
+Epoch 22/50, Batch 100/229, Loss: 3.3734
+Epoch 22/50, Batch 150/229, Loss: 3.5189
+Epoch 22/50, Batch 200/229, Loss: 3.4797
+Epoch 22/50:
+  Train Loss: 3.5644
+  Val Loss: 2.8040
+  Learning Rate: 0.000010
+--------------------------------------------------
+Epoch 23/50, Batch 0/229, Loss: 3.5321
+Epoch 23/50, Batch 50/229, Loss: 2.6465
+Epoch 23/50, Batch 100/229, Loss: 3.5925
+Epoch 23/50, Batch 150/229, Loss: 3.5993
+Epoch 23/50, Batch 200/229, Loss: 3.0970
+Epoch 23/50:
+  Train Loss: 3.5003
+  Val Loss: 2.8034
+  Learning Rate: 0.000010
+--------------------------------------------------
+Epoch 24/50, Batch 0/229, Loss: 3.9583
+Epoch 24/50, Batch 50/229, Loss: 3.3768
+Epoch 24/50, Batch 100/229, Loss: 5.4873
+Epoch 24/50, Batch 150/229, Loss: 3.2872
+Epoch 24/50, Batch 200/229, Loss: 3.9629
+Epoch 24/50:
+  Train Loss: 3.3929
+  Val Loss: 2.8128
+  Learning Rate: 0.000010
+--------------------------------------------------
+Epoch 25/50, Batch 0/229, Loss: 2.9111
+Epoch 25/50, Batch 50/229, Loss: 2.3257
+Epoch 25/50, Batch 100/229, Loss: 4.4312
+Epoch 25/50, Batch 150/229, Loss: 3.5533
+Epoch 25/50, Batch 200/229, Loss: 4.7262
+Epoch 25/50:
+  Train Loss: 3.3522
+  Val Loss: 2.8605
+  Learning Rate: 0.000010
+--------------------------------------------------
+Epoch 26/50, Batch 0/229, Loss: 3.5151
+Epoch 26/50, Batch 50/229, Loss: 2.8827
+Epoch 26/50, Batch 100/229, Loss: 4.9575
+Epoch 26/50, Batch 150/229, Loss: 2.1013
+Epoch 26/50, Batch 200/229, Loss: 3.7891
+Epoch 26/50:
+  Train Loss: 3.3510
+  Val Loss: 2.9118
+  Learning Rate: 0.000010
+--------------------------------------------------
+Epoch 27/50, Batch 0/229, Loss: 3.7664
+Epoch 27/50, Batch 50/229, Loss: 2.9983
+Epoch 27/50, Batch 100/229, Loss: 3.0398
+Epoch 27/50, Batch 150/229, Loss: 3.6841
+Epoch 27/50, Batch 200/229, Loss: 3.1270
+Epoch 27/50:
+  Train Loss: 3.2903
+  Val Loss: 2.8292
+  Learning Rate: 0.000010
+--------------------------------------------------
+Epoch 28/50, Batch 0/229, Loss: 2.6924
+Epoch 28/50, Batch 50/229, Loss: 3.5117
+Epoch 28/50, Batch 100/229, Loss: 4.7934
+Epoch 28/50, Batch 150/229, Loss: 1.7908
+Epoch 28/50, Batch 200/229, Loss: 3.1034
+Epoch 28/50:
+  Train Loss: 3.2998
+  Val Loss: 2.8151
+  Learning Rate: 0.000010
+--------------------------------------------------
+Epoch 29/50, Batch 0/229, Loss: 3.6613
+Epoch 29/50, Batch 50/229, Loss: 3.7522
+Epoch 29/50, Batch 100/229, Loss: 4.0786
+Epoch 29/50, Batch 150/229, Loss: 3.1626
+Epoch 29/50, Batch 200/229, Loss: 4.2221
+Epoch 29/50:
+  Train Loss: 3.2664
+  Val Loss: 2.8353
+  Learning Rate: 0.000010
+--------------------------------------------------
+Epoch 30/50, Batch 0/229, Loss: 3.5789
+Epoch 30/50, Batch 50/229, Loss: 4.7957
+Epoch 30/50, Batch 100/229, Loss: 3.3299
+Epoch 30/50, Batch 150/229, Loss: 2.3618
+Epoch 30/50, Batch 200/229, Loss: 3.2404
+Epoch 30/50:
+  Train Loss: 3.2558
+  Val Loss: 2.8310
+  Learning Rate: 0.000010
+--------------------------------------------------
+Checkpoint saved: ssd_fruit_checkpoint_epoch_30.pth
+Epoch 31/50, Batch 0/229, Loss: 2.7128
+Epoch 31/50, Batch 50/229, Loss: 3.1098
+Epoch 31/50, Batch 100/229, Loss: 3.2447
+Epoch 31/50, Batch 150/229, Loss: 3.1250
+Epoch 31/50, Batch 200/229, Loss: 2.0060
+Epoch 31/50:
+  Train Loss: 3.2220
+  Val Loss: 2.8408
+  Learning Rate: 0.000010
+--------------------------------------------------
+Epoch 32/50, Batch 0/229, Loss: 3.2258
+Epoch 32/50, Batch 50/229, Loss: 2.9457
+Epoch 32/50, Batch 100/229, Loss: 4.8695
+Epoch 32/50, Batch 150/229, Loss: 3.1954
+Epoch 32/50, Batch 200/229, Loss: 2.9487
+Epoch 32/50:
+  Train Loss: 3.2092
+  Val Loss: 2.8437
+  Learning Rate: 0.000010
+--------------------------------------------------
+Epoch 33/50, Batch 0/229, Loss: 4.0883
+Epoch 33/50, Batch 50/229, Loss: 1.7903
+Epoch 33/50, Batch 100/229, Loss: 3.0862
+Epoch 33/50, Batch 150/229, Loss: 4.0272
+Epoch 33/50, Batch 200/229, Loss: 3.6164
+Epoch 33/50:
+  Train Loss: 3.1812
+  Val Loss: 2.8277
+  Learning Rate: 0.000010
+--------------------------------------------------
+Epoch 34/50, Batch 0/229, Loss: 2.8093
+Epoch 34/50, Batch 50/229, Loss: 3.2049
+Epoch 34/50, Batch 100/229, Loss: 2.0174
+Epoch 34/50, Batch 150/229, Loss: 4.8248
+Epoch 34/50, Batch 200/229, Loss: 5.3113
+Epoch 34/50:
+  Train Loss: 3.1363
+  Val Loss: 2.8251
+  Learning Rate: 0.000010
+--------------------------------------------------
+Epoch 35/50, Batch 0/229, Loss: 3.2503
+Epoch 35/50, Batch 50/229, Loss: 3.2085
+Epoch 35/50, Batch 100/229, Loss: 3.2241
+Epoch 35/50, Batch 150/229, Loss: 3.6220
+Epoch 35/50, Batch 200/229, Loss: 1.8692
+Epoch 35/50:
+  Train Loss: 3.1123
+  Val Loss: 2.8511
+  Learning Rate: 0.000010
+--------------------------------------------------
+Epoch 36/50, Batch 0/229, Loss: 3.8137
+Epoch 36/50, Batch 50/229, Loss: 3.0541
+Epoch 36/50, Batch 100/229, Loss: 2.9124
+Epoch 36/50, Batch 150/229, Loss: 3.9891
+Epoch 36/50, Batch 200/229, Loss: 2.5246
+Epoch 36/50:
+  Train Loss: 3.1274
+  Val Loss: 2.8266
+  Learning Rate: 0.000010
+--------------------------------------------------
+Epoch 37/50, Batch 0/229, Loss: 2.0491
+Epoch 37/50, Batch 50/229, Loss: 2.6035
+Epoch 37/50, Batch 100/229, Loss: 3.6550
+Epoch 37/50, Batch 150/229, Loss: 3.1568
+Epoch 37/50, Batch 200/229, Loss: 1.6992
+Epoch 37/50:
+  Train Loss: 3.1042
+  Val Loss: 2.8340
+  Learning Rate: 0.000010
+--------------------------------------------------
+Epoch 38/50, Batch 0/229, Loss: 3.3021
+Epoch 38/50, Batch 50/229, Loss: 2.5052
+Epoch 38/50, Batch 100/229, Loss: 2.7826
+Epoch 38/50, Batch 150/229, Loss: 3.7556
+Epoch 38/50, Batch 200/229, Loss: 5.1171
+Epoch 38/50:
+  Train Loss: 3.0823
+  Val Loss: 2.8321
+  Learning Rate: 0.000010
+--------------------------------------------------
+Epoch 39/50, Batch 0/229, Loss: 4.8961
+Epoch 39/50, Batch 50/229, Loss: 2.3384
+Epoch 39/50, Batch 100/229, Loss: 2.1264
+Epoch 39/50, Batch 150/229, Loss: 2.8725
+Epoch 39/50, Batch 200/229, Loss: 2.4822
+Epoch 39/50:
+  Train Loss: 3.0876
+  Val Loss: 2.8179
+  Learning Rate: 0.000010
+--------------------------------------------------
+Epoch 40/50, Batch 0/229, Loss: 4.4929
+Epoch 40/50, Batch 50/229, Loss: 1.9916
+Epoch 40/50, Batch 100/229, Loss: 1.9789
+Epoch 40/50, Batch 150/229, Loss: 2.9470
+Epoch 40/50, Batch 200/229, Loss: 1.9998
+Epoch 40/50:
+  Train Loss: 3.0487
+  Val Loss: 2.8256
+  Learning Rate: 0.000001
+--------------------------------------------------
+Checkpoint saved: ssd_fruit_checkpoint_epoch_40.pth
+Epoch 41/50, Batch 0/229, Loss: 2.0772
+Epoch 41/50, Batch 50/229, Loss: 4.2156
+Epoch 41/50, Batch 100/229, Loss: 4.0058
+Epoch 41/50, Batch 150/229, Loss: 4.6129
+Epoch 41/50, Batch 200/229, Loss: 3.6494
+Epoch 41/50:
+  Train Loss: 3.0151
+  Val Loss: 2.8223
+  Learning Rate: 0.000001
+--------------------------------------------------
+Epoch 42/50, Batch 0/229, Loss: 2.2466
+Epoch 42/50, Batch 50/229, Loss: 2.0341
+Epoch 42/50, Batch 100/229, Loss: 2.4292
+Epoch 42/50, Batch 150/229, Loss: 2.0449
+Epoch 42/50, Batch 200/229, Loss: 3.6768
+Epoch 42/50:
+  Train Loss: 3.0050
+  Val Loss: 2.8227
+  Learning Rate: 0.000001
+--------------------------------------------------
+Epoch 43/50, Batch 0/229, Loss: 3.0799
+Epoch 43/50, Batch 50/229, Loss: 3.5139
+Epoch 43/50, Batch 100/229, Loss: 6.0201
+Epoch 43/50, Batch 150/229, Loss: 3.1201
+Epoch 43/50, Batch 200/229, Loss: 2.8465
+Epoch 43/50:
+  Train Loss: 2.9914
+  Val Loss: 2.8290
+  Learning Rate: 0.000001
+--------------------------------------------------
+Epoch 44/50, Batch 0/229, Loss: 2.2321
+Epoch 44/50, Batch 50/229, Loss: 3.0235
+Epoch 44/50, Batch 100/229, Loss: 4.0725
+Epoch 44/50, Batch 150/229, Loss: 3.5712
+Epoch 44/50, Batch 200/229, Loss: 2.6990
+Epoch 44/50:
+  Train Loss: 2.9949
+  Val Loss: 2.8234
+  Learning Rate: 0.000001
+--------------------------------------------------
+Epoch 45/50, Batch 0/229, Loss: 2.1074
+Epoch 45/50, Batch 50/229, Loss: 4.3925
+Epoch 45/50, Batch 100/229, Loss: 3.6539
+Epoch 45/50, Batch 150/229, Loss: 3.3695
+Epoch 45/50, Batch 200/229, Loss: 2.1913
+Epoch 45/50:
+  Train Loss: 3.0061
+  Val Loss: 2.8225
+  Learning Rate: 0.000001
+--------------------------------------------------
+Epoch 46/50, Batch 0/229, Loss: 2.5805
+Epoch 46/50, Batch 50/229, Loss: 4.6652
+Epoch 46/50, Batch 100/229, Loss: 2.9185
+Epoch 46/50, Batch 150/229, Loss: 3.2733
+Epoch 46/50, Batch 200/229, Loss: 2.5021
+Epoch 46/50:
+  Train Loss: 2.9904
+  Val Loss: 2.8187
+  Learning Rate: 0.000001
+--------------------------------------------------
+Epoch 47/50, Batch 0/229, Loss: 3.2701
+Epoch 47/50, Batch 50/229, Loss: 4.9484
+Epoch 47/50, Batch 100/229, Loss: 2.6845
+Epoch 47/50, Batch 150/229, Loss: 3.6567
+Epoch 47/50, Batch 200/229, Loss: 1.9259
+Epoch 47/50:
+  Train Loss: 2.9897
+  Val Loss: 2.8252
+  Learning Rate: 0.000001
+--------------------------------------------------
+Epoch 48/50, Batch 0/229, Loss: 2.8648
+Epoch 48/50, Batch 50/229, Loss: 3.2485
+Epoch 48/50, Batch 100/229, Loss: 4.1449
+Epoch 48/50, Batch 150/229, Loss: 3.6058
+Epoch 48/50, Batch 200/229, Loss: 2.5925
+Epoch 48/50:
+  Train Loss: 2.9880
+  Val Loss: 2.8233
+  Learning Rate: 0.000001
+--------------------------------------------------
+Epoch 49/50, Batch 0/229, Loss: 3.1251
+Epoch 49/50, Batch 50/229, Loss: 5.6415
+Epoch 49/50, Batch 100/229, Loss: 3.2674
+Epoch 49/50, Batch 150/229, Loss: 2.5398
+Epoch 49/50, Batch 200/229, Loss: 3.5694
+Epoch 49/50:
+  Train Loss: 2.9828
+  Val Loss: 2.8246
+  Learning Rate: 0.000001
+--------------------------------------------------
+Epoch 50/50, Batch 0/229, Loss: 2.8673
+Epoch 50/50, Batch 50/229, Loss: 3.0131
+Epoch 50/50, Batch 100/229, Loss: 3.1787
+Epoch 50/50, Batch 150/229, Loss: 4.2544
+Epoch 50/50, Batch 200/229, Loss: 3.2564
+Epoch 50/50:
+  Train Loss: 2.9852
+  Val Loss: 2.8302
+  Learning Rate: 0.000001
+--------------------------------------------------
+Checkpoint saved: ssd_fruit_checkpoint_epoch_50.pth
+Training completed in 40.22 minutes

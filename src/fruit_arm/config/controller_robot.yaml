@@ -1,0 +1,64 @@
+# 1. Controller Manager Configuration
+controller_manager:
+  ros__parameters:
+    update_rate: 100
+
+    # Controller 1: Joint State Broadcaster
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    # Controller 2: Arm Controller
+    qarm_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    # Controller 3: Gripper Controller
+    gripper_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+
+# 2. Arm Controller Parameters
+qarm_controller:
+  ros__parameters:
+    joints:
+      - YAW_joint        # Fixed: added _joint suffix
+      - SHOULDER_joint   # Fixed: added _joint suffix  
+      - ELBOW_joint      # Fixed: added _joint suffix
+      - WRIST_joint      # Fixed: added _joint suffix
+    
+    command_interfaces:
+      - position
+
+    state_interfaces:
+      - position
+      - velocity
+
+
+# 3. Gripper Controller Parameters
+gripper_controller:
+  ros__parameters:
+    joints:
+      # Palm "abduction" joints
+      - gripper_palm_finger_1_joint     
+      - gripper_palm_finger_2_joint     
+      
+      # Finger 1 joints
+      - gripper_finger_1_joint_1        
+      - gripper_finger_1_joint_2        
+      - gripper_finger_1_joint_3        
+      
+      # Finger 2 joints
+      - gripper_finger_2_joint_1        
+      - gripper_finger_2_joint_2        
+      - gripper_finger_2_joint_3        
+      
+      # Middle Finger joints
+      - gripper_finger_middle_joint_1   
+      - gripper_finger_middle_joint_2   
+      - gripper_finger_middle_joint_3
+
+    command_interfaces:
+      - position
+      
+    state_interfaces:
+      - position
+      - velocity

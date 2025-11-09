@@ -1,0 +1,25 @@
+# ROS 2 workspace build directories
+build/
+install/
+log/
+src/fruit_dataset/
+merged_fruit_detection_dataset/
+libtorch/
+fruit_detections_msg/
+
+# Optional: Common development ignores
+*.pyc
+__pycache__/
+*.so
+*.d
+*.os
+*.a
+CMakeLists.txt.user
+*.cmake
+Makefile
+*.pro
+*.autosave
+.vscode/
+*.pth
+*.pt
+*.zip
