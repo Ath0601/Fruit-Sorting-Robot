@@ -1,6 +1,7 @@
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, TimerAction, DeclareLaunchArgument
-from launch.substitutions import LaunchConfiguration, PathJoinSubstitution, FindExecutable, Command
+from launch.actions import DeclareLaunchArgument, TimerAction, RegisterEventHandler, IncludeLaunchDescription
+from launch.event_handlers import OnProcessExit
+from launch.substitutions import LaunchConfiguration, Command, PathJoinSubstitution, FindExecutable
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 from launch.launch_description_sources import PythonLaunchDescriptionSource
@@ -8,23 +9,38 @@ from launch_ros.parameter_descriptions import ParameterValue
 
 
 def generate_launch_description():
-    # --- Package paths ---
+    # --------------------------------------------------------------------
+    # 1. Package paths and configurations
+    # --------------------------------------------------------------------
     pkg_share = FindPackageShare('fruit_arm')
     moveit_pkg_share = FindPackageShare('moveit_pkg')
 
-    # --- Configurations ---
     use_sim_time = LaunchConfiguration('use_sim_time')
     world_path = PathJoinSubstitution([pkg_share, 'world', 'empty.world'])
     xacro_file = PathJoinSubstitution([pkg_share, 'urdf', 'robot_gripper.urdf.xacro'])
 
-    # --- Generate robot description from xacro ---
     robot_description_content = Command([
-        FindExecutable(name='xacro'), ' ', xacro_file
+        FindExecutable(name='xacro'),
+        ' ',
+        xacro_file,
     ])
-    robot_description = ParameterValue(robot_description_content, value_type=str)
 
     # --------------------------------------------------------------------
-    # 1. Launch Gazebo with the specified world
+    # 2. Robot state publisher
+    # --------------------------------------------------------------------
+    robot_state_publisher_node = Node(
+        package='robot_state_publisher',
+        executable='robot_state_publisher',
+        name='robot_state_publisher',
+        parameters=[{
+            'use_sim_time': use_sim_time,
+            'robot_description': ParameterValue(robot_description_content, value_type=str)
+        }],
+        output='screen'
+    )
+
+    # --------------------------------------------------------------------
+    # 3. Gazebo world
     # --------------------------------------------------------------------
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
@@ -37,23 +53,9 @@ def generate_launch_description():
     )
 
     # --------------------------------------------------------------------
-    # 2. Publish robot state to TF
+    # 4. Spawn robot entity in Gazebo
     # --------------------------------------------------------------------
-    robot_state_publisher = Node(
-        package='robot_state_publisher',
-        executable='robot_state_publisher',
-        name='robot_state_publisher',
-        output='screen',
-        parameters=[{
-            'use_sim_time': use_sim_time,
-            'robot_description': robot_description
-        }]
-    )
-
-    # --------------------------------------------------------------------
-    # 3. Spawn the robot entity in Gazebo
-    # --------------------------------------------------------------------
-    spawn_robot = Node(
+    create_node = Node(
         package='ros_gz_sim',
         executable='create',
         arguments=['-name', 'QARM_with_Gripper', '-topic', 'robot_description'],
@@ -61,23 +63,23 @@ def generate_launch_description():
     )
 
     # --------------------------------------------------------------------
-    # 4. Spawn controllers sequentially
+    # 5. Controller spawners (UR5e-style)
     # --------------------------------------------------------------------
-    joint_state_broadcaster = Node(
+    joint_state_spawner = Node(
         package='controller_manager',
         executable='spawner',
         arguments=['joint_state_broadcaster', '--controller-manager', '/controller_manager'],
         output='screen'
     )
 
-    qarm_controller = Node(
+    trajectory_controller_spawner = Node(
         package='controller_manager',
         executable='spawner',
         arguments=['qarm_controller', '--controller-manager', '/controller_manager'],
         output='screen'
     )
 
-    gripper_controller = Node(
+    gripper_controller_spawner = Node(
         package='controller_manager',
         executable='spawner',
         arguments=['gripper_controller', '--controller-manager', '/controller_manager'],
@@ -85,9 +87,8 @@ def generate_launch_description():
     )
 
     # --------------------------------------------------------------------
-    # 5. Launch MoveIt (move_group + RViz)
+    # 6. MoveIt launch (move_group + RViz)
     # --------------------------------------------------------------------
-
     moveit_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             PathJoinSubstitution([moveit_pkg_share, 'launch', 'move_group.launch.py'])
@@ -95,83 +96,112 @@ def generate_launch_description():
     )
 
     # --------------------------------------------------------------------
-    # 6. Bridge Gazebo camera topics → ROS2 standard names (CORRECTED)
+    # 7. Gazebo–ROS bridges (for camera topics)
     # --------------------------------------------------------------------
-    bridges = [
-        # RGB image
-        Node(
-            package='ros_gz_bridge',
-            executable='parameter_bridge',
-            arguments=[
-                '/world/empty/model/QARM_with_Gripper/link/FOREARM/sensor/rgb_camera/image'
-                '@sensor_msgs/msg/Image[gz.msgs.Image',
-                '--ros-args', '-r',
-                '/world/empty/model/QARM_with_Gripper/link/FOREARM/sensor/rgb_camera/image'
-                ':=/camera/color/image_raw'
-            ],
-            output='screen'
+    bridge_rgb = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=[
+            '/world/empty/model/QARM_with_Gripper/link/FOREARM/sensor/rgb_camera/image@sensor_msgs/msg/Image[gz.msgs.Image',
+            '--ros-args', '-r',
+            '/world/empty/model/QARM_with_Gripper/link/FOREARM/sensor/rgb_camera/image:=/camera/color/image_raw'
+        ],
+        output='screen'
+    )
+
+    bridge_caminfo = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=[
+            '/world/empty/model/QARM_with_Gripper/link/FOREARM/sensor/rgb_camera/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo',
+            '--ros-args', '-r',
+            '/world/empty/model/QARM_with_Gripper/link/FOREARM/sensor/rgb_camera/camera_info:=/camera/color/camera_info'
+        ],
+        output='screen'
+    )
+
+    bridge_depth = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=[
+            '/world/empty/model/QARM_with_Gripper/link/FOREARM/sensor/rgbd_camera/depth_image@sensor_msgs/msg/Image[gz.msgs.Image',
+            '--ros-args', '-r',
+            '/world/empty/model/QARM_with_Gripper/link/FOREARM/sensor/rgbd_camera/depth_image:=/camera/depth/image_raw'
+        ],
+        output='screen'
+    )
+
+    bridge_depth_caminfo = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=[
+            '/world/empty/model/QARM_with_Gripper/link/FOREARM/sensor/rgbd_camera/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo',
+            '--ros-args', '-r',
+            '/world/empty/model/QARM_with_Gripper/link/FOREARM/sensor/rgbd_camera/camera_info:=/camera/depth/camera_info'
+        ],
+        output='screen'
+    )
+
+    delayed_bridge_rgb = TimerAction(period=7.0, actions=[bridge_rgb])
+    delayed_bridge_caminfo = TimerAction(period=7.0, actions=[bridge_caminfo])
+    delayed_bridge_depth = TimerAction(period=9.0, actions=[bridge_depth])
+    delayed_bridge_depth_caminfo = TimerAction(period=9.0, actions=[bridge_depth_caminfo])
+
+    # --------------------------------------------------------------------
+    # 8. Launch sequence — copied directly from UR5e
+    # --------------------------------------------------------------------
+    return LaunchDescription([
+        DeclareLaunchArgument(
+            name='use_sim_time',
+            default_value='true',
+            description='Use simulation (Gazebo) clock if true'
         ),
-        # RGB camera info
-        Node(
-            package='ros_gz_bridge',
-            executable='parameter_bridge',
-            arguments=[
-                '/world/empty/model/QARM_with_Gripper/link/FOREARM/sensor/rgb_camera/camera_info'
-                '@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo',
-                '--ros-args', '-r',
-                '/world/empty/model/QARM_with_Gripper/link/FOREARM/sensor/rgb_camera/camera_info'
-                ':=/camera/color/camera_info'
-            ],
-            output='screen'
+        gazebo,
+        robot_state_publisher_node,
+        create_node,
+        RegisterEventHandler(
+            OnProcessExit(
+                target_action=create_node,
+                on_exit=[
+                    TimerAction(
+                        period=4.0,
+                        actions=[joint_state_spawner]
+                    )
+                ]
+            )
         ),
-        # Depth image
-        Node(
-            package='ros_gz_bridge',
-            executable='parameter_bridge',
-            arguments=[
-                '/world/empty/model/QARM_with_Gripper/link/FOREARM/sensor/rgbd_camera/image'
-                '@sensor_msgs/msg/Image[gz.msgs.Image',
-                '--ros-args', '-r',
-                '/world/empty/model/QARM_with_Gripper/link/FOREARM/sensor/rgbd_camera/image'
-                ':=/camera/depth/image_raw'
-            ],
-            output='screen'
+        RegisterEventHandler(
+            OnProcessExit(
+                target_action=joint_state_spawner,
+                on_exit=[
+                    TimerAction(
+                        period=4.0,
+                        actions=[trajectory_controller_spawner]
+                    )
+                ]
+            )
         ),
-        # Depth camera info
-        Node(
-            package='ros_gz_bridge',
-            executable='parameter_bridge',
-            arguments=[
-                '/world/empty/model/QARM_with_Gripper/link/FOREARM/sensor/rgbd_camera/camera_info'
-                '@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo',
-                '--ros-args', '-r',
-                '/world/empty/model/QARM_with_Gripper/link/FOREARM/sensor/rgbd_camera/camera_info'
-                ':=/camera/depth/camera_info'
-            ],
-            output='screen'
+        RegisterEventHandler(
+            OnProcessExit(
+                target_action=trajectory_controller_spawner,
+                on_exit=[
+                    TimerAction(
+                        period=4.0,
+                        actions=[gripper_controller_spawner]
+                    )
+                ]
+            )
+        ),
+        moveit_launch,
+        RegisterEventHandler(
+            OnProcessExit(
+                target_action=joint_state_spawner,
+                on_exit=[
+                    delayed_bridge_rgb,
+                    delayed_bridge_caminfo,
+                    delayed_bridge_depth,
+                    delayed_bridge_depth_caminfo
+                ]
+            )
         )
-    ]
-
-    # --------------------------------------------------------------------
-    # 7. Define the launch sequence (timed like the UR5e)
-    # --------------------------------------------------------------------
-    ld = LaunchDescription()
-    ld.add_action(DeclareLaunchArgument('use_sim_time', default_value='true'))
-
-    # Step 1: Gazebo and robot state publisher
-    ld.add_action(gazebo)
-    ld.add_action(robot_state_publisher)
-    ld.add_action(spawn_robot)
-
-    # Step 2: Controllers (delayed to allow Gazebo to spawn)
-    ld.add_action(TimerAction(period=5.0, actions=[joint_state_broadcaster]))
-    ld.add_action(TimerAction(period=10.0, actions=[qarm_controller]))
-    ld.add_action(TimerAction(period=15.0, actions=[gripper_controller]))
-
-    # Step 3: MoveIt (launch once controllers are active)
-    ld.add_action(TimerAction(period=20.0, actions=[moveit_launch]))
-
-    # Step 4: Bridges (start after everything else)
-    ld.add_action(TimerAction(period=25.0, actions=bridges))
-
-    return ld
+    ])

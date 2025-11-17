@@ -20,10 +20,10 @@ controller_manager:
 qarm_controller:
   ros__parameters:
     joints:
-      - YAW_joint        # Fixed: added _joint suffix
-      - SHOULDER_joint   # Fixed: added _joint suffix  
-      - ELBOW_joint      # Fixed: added _joint suffix
-      - WRIST_joint      # Fixed: added _joint suffix
+      - YAW_joint        
+      - SHOULDER_joint    
+      - ELBOW_joint      
+      - WRIST_joint      
     
     command_interfaces:
       - position

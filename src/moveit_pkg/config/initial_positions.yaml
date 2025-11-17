@@ -1,7 +1,7 @@
 # Default initial positions for QARM_with_Gripper's ros2_control fake system
 
 initial_positions:
-  ELBOW_joint: 0.0
+  ELBOW_joint: 0.5236
   SHOULDER_joint: 0.0
   WRIST_joint: 0.0
   YAW_joint: 0.0

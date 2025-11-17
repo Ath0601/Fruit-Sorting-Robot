@@ -37,7 +37,7 @@
 
   <gazebo>
     <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
-      <parameters>/home/atharva/quanser_ws/src/fruit_arm/config/controller_robot.yaml</parameters>
+      <parameters>$(find fruit_arm)/config/controller_robot.yaml</parameters>
       <controller_manager_name>controller_manager</controller_manager_name>
     </plugin>
   </gazebo>
