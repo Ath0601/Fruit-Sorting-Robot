@@ -9,9 +9,8 @@ from launch_ros.parameter_descriptions import ParameterValue
 
 
 def generate_launch_description():
-    # --------------------------------------------------------------------
-    # 1. Package paths and configurations
-    # --------------------------------------------------------------------
+
+    # Package paths and configurations
     pkg_share = FindPackageShare('fruit_arm')
     moveit_pkg_share = FindPackageShare('moveit_pkg')
 
@@ -25,9 +24,7 @@ def generate_launch_description():
         xacro_file,
     ])
 
-    # --------------------------------------------------------------------
-    # 2. Robot state publisher
-    # --------------------------------------------------------------------
+    # Robot state publisher
     robot_state_publisher_node = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
@@ -39,9 +36,8 @@ def generate_launch_description():
         output='screen'
     )
 
-    # --------------------------------------------------------------------
+
     # 3. Gazebo world
-    # --------------------------------------------------------------------
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             PathJoinSubstitution([FindPackageShare('ros_gz_sim'), 'launch', 'gz_sim.launch.py'])
@@ -52,9 +48,8 @@ def generate_launch_description():
         }.items()
     )
 
-    # --------------------------------------------------------------------
-    # 4. Spawn robot entity in Gazebo
-    # --------------------------------------------------------------------
+
+    # Spawn robot entity in Gazebo
     create_node = Node(
         package='ros_gz_sim',
         executable='create',
@@ -62,9 +57,8 @@ def generate_launch_description():
         output='screen'
     )
 
-    # --------------------------------------------------------------------
-    # 5. Controller spawners (UR5e-style)
-    # --------------------------------------------------------------------
+
+    # Controller spawners (UR5e-style)
     joint_state_spawner = Node(
         package='controller_manager',
         executable='spawner',
@@ -86,18 +80,16 @@ def generate_launch_description():
         output='screen'
     )
 
-    # --------------------------------------------------------------------
-    # 6. MoveIt launch (move_group + RViz)
-    # --------------------------------------------------------------------
+
+    # MoveIt launch (move_group + RViz)
     moveit_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             PathJoinSubstitution([moveit_pkg_share, 'launch', 'move_group.launch.py'])
         ])
     )
 
-    # --------------------------------------------------------------------
-    # 7. Gazebo–ROS bridges (for camera topics)
-    # --------------------------------------------------------------------
+
+    # Gazebo–ROS bridges (for camera topics)
     bridge_rgb = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
@@ -147,9 +139,8 @@ def generate_launch_description():
     delayed_bridge_depth = TimerAction(period=9.0, actions=[bridge_depth])
     delayed_bridge_depth_caminfo = TimerAction(period=9.0, actions=[bridge_depth_caminfo])
 
-    # --------------------------------------------------------------------
-    # 8. Launch sequence — copied directly from UR5e
-    # --------------------------------------------------------------------
+
+    # Launch sequence
     return LaunchDescription([
         DeclareLaunchArgument(
             name='use_sim_time',
